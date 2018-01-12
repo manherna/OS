@@ -1,3 +1,9 @@
+/*Possible solution for a 2 producer 1 consumer
+* problem with 1 buffer per producer.
+* by Manuel Hernández
+*/
+
+
 #include <iostream>
 #include <pthread.h>
 #define TAM 1000
