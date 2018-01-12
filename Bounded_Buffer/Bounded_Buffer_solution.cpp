@@ -1,3 +1,10 @@
+/*
+  Producer-Consumer problem solution
+  using a bounded buffer, 2 semaphores
+  and a mutex.
+  by Manuel Hernández Nájera-Alesón.
+*/
+
 #include "buffer.h"
 #include <stdlib.h>
 #include <pthread.h>
@@ -66,11 +73,10 @@ void *producer(void * param){
 
     sem_wait(&empty);
     pthread_mutex_lock(&bufMutex);
-    printf("Accessing...\n");
 
     if (b.insert_item(item)) printf("Could not produce!\n");
     else printf("producer produced %d \n",item);
-    printf("Leaving...\n");
+
     pthread_mutex_unlock(&bufMutex);
     sem_post(&full);
 
@@ -80,14 +86,14 @@ void * consumer (void * param){
   buffer_item item;
   while (true) {
   int aux = rand() % 5 + 1;
+
   sleep(aux);
   sem_wait(&full);
   pthread_mutex_lock(&bufMutex);
-  printf("Accessing to c...\n");
-  if(b.remove_item(&item))
-    printf("Could not consume!\n");
-    else printf("consumer consumed %d\n", item);
-      printf("Leaving c...\n");
+
+  if(b.remove_item(&item)) printf("Could not consume!\n");
+  else printf("consumer consumed %d\n", item);
+
   pthread_mutex_unlock(&bufMutex);
   sem_post(&empty);
   }

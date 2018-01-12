@@ -1,9 +1,12 @@
+// Class that implements the bounded buffer for the
+// Producer-Consumer problem
+
 #define BUFFER_SIZE 5
 
 typedef int buffer_item;
 
 class Buffer {
-  buffer_item b[BUFFER_SIZE]{-1};
+  buffer_item b[BUFFER_SIZE] = {-1, -1, -1, -1, -1};;
   int prod, con;
 
 public:
@@ -11,6 +14,7 @@ public:
   Buffer(){
   }
   ~Buffer(){  };
+
 
   void init(){
     prod = con = 0;
@@ -25,7 +29,7 @@ public:
     else return true;
   }
 
-  
+
   bool remove_item(buffer_item *oItem){
     if(b[con] != -1){
       *oItem = b[con];
