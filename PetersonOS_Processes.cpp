@@ -11,8 +11,9 @@ int turn;
 bool flag[2] = {false};
 const int i = 0;
 const int j = 1;
-
 pid_t a;
+
+//shmget() shmat() look for it
 
 int main(){
   cout << "aa";
